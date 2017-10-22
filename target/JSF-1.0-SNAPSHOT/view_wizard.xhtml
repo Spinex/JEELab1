@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <f:metadata>
+        <f:viewParam name="wizardId" value="#{viewWizard.wizardId}" required="true" id="wizardId" />
+        <f:event type="preRenderView" listener="#{viewWizard.init()}"/>
+    </f:metadata>
+    <h:head>
+        <title>#{viewWizard.wizard}</title>
+    </h:head>
+    <h:body>
+        <h:panelGrid columns="2">
+            <h:outputLabel value="Imię:" for="title"/>
+            <h:outputText id="title" value="#{viewWizard.wizard.name}"/>
+            <h:outputLabel value="Mana:" for="mana"/>
+            <h:outputText id="mana" value="#{viewWizard.wizard.mana}" />
+            <h:outputLabel value="Żywioł:" for="element"/>
+            <h:outputText id="element" value="#{viewWizard.wizard.element.name}" />
+            <h:outputLabel value="Wieża:" for="tower"/>
+            <h:outputText id="tower" value="#{viewWizard.wizard.tower.height} m" />
+        </h:panelGrid>
+        <h:button value="Powrót" outcome="list_wizards.xhtml"/>
+    </h:body>
+</html>

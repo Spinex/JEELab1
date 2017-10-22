@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <f:metadata>
+        <f:viewParam name="wizardId" value="#{editWizard.wizardId}" />
+        <f:event type="preRenderView" listener="#{editWizard.init()}"/>
+    </f:metadata>
+    <h:head>
+        <title>#{editWizard.wizard}</title>
+    </h:head>
+    <h:body>
+
+        <h:form>
+
+            <h:panelGrid columns="3" styleClass="tabela">
+                <h:outputLabel value="Imię:" for="name"/>
+                <h:inputText id="name"
+                             value="#{editWizard.wizard.name}"
+                             validator="#{wizardNameValidator.validate}"/>
+                <h:message for="name"/>
+
+                <h:outputLabel value="Mana:" for="mana"/>
+                <h:inputText id="mana"
+                             value="#{editWizard.wizard.mana}"/>
+                <h:message for="mana"/>
+
+                <h:outputLabel value="Żywioł:" for="magicElement"/>
+                <h:selectOneListbox id="magicElement" value="#{editWizard.wizard.element}" converter="#{magicElementConverter}">
+                    <f:selectItems value="#{editWizard.magicElementsAsSelectItems}"/>
+                </h:selectOneListbox>
+                <h:message for="magicElement"/>
+                
+                <h:outputLabel value="Wieża:" for="tower"/>
+                <h:selectOneListbox id="tower" value="#{editWizard.wizard.tower}" converter="#{towerConverter}">
+                    <f:selectItems value="#{editWizard.towersAsSelectItems}"/>
+                </h:selectOneListbox>
+                <h:message for="tower"/>
+
+            </h:panelGrid>
+            
+            <h:commandButton value="Zapisz" action="#{editWizard.saveWizard()}"/>
+
+        </h:form>
+        <h:button value="Powrót" outcome="list_wizards.xhtml"/>
+    </h:body>
+</html>

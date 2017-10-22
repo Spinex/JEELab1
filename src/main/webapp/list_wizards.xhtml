@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Magowie</title>
+    </h:head>
+    <h:body>
+        <h:dataTable value="#{listWizards.towers}" var="tower">
+            <h:column>
+                <h:outputText value="Wieża #{tower.height} m" />
+            </h:column>
+
+            <h:column>
+                <h:button value="Edytuj" outcome="edit_tower.xhtml">
+                    <f:param name="towerId" value="#{tower.id}" />
+                </h:button>
+            </h:column>
+
+            <h:column>
+                <h:form>
+                    <h:commandButton value="Usuń"
+                                     action="#{listWizards.removeTower(tower)}"/>
+                </h:form>
+
+            </h:column>
+            <h:column>
+                <h:dataTable value="#{listWizards.getWizardsByTower(tower)}" var="wizard">
+                    <h:column>
+                        <h:outputText value="Id: #{wizard.id}" />
+                    </h:column>
+
+                    <h:column>
+                        <h:outputText value="#{wizard.name}" escape="true" />
+                    </h:column>
+
+                    <h:column>
+                        <h:outputText value="Mana #{wizard.mana}" />
+                    </h:column>
+
+                    <h:column>
+                        <h:outputText value="#{wizard.element.name}" />
+                    </h:column>
+
+                    <h:column>
+                        <h:button value="Pokaż" outcome="view_wizard.xhtml">
+                            <f:param name="wizardId" value="#{wizard.id}" />
+                        </h:button>
+                    </h:column>
+
+                    <h:column>
+                        <h:button value="Edytuj" outcome="edit_wizard.xhtml">
+                            <f:param name="wizardId" value="#{wizard.id}" />
+                        </h:button>
+                    </h:column>
+
+                    <h:column>
+                        <!--<form action="/delete/">-->
+                            <!--<input type="hidden" name="id" value="2"/>-->
+                            <!--<input type="submit"/>-->
+                        <!--</form>-->
+
+                        <h:form>
+                            <h:commandButton value="Usuń"
+                               action="#{listWizards.removeWizard(wizard)}"/>
+                        </h:form>
+
+                    </h:column>
+                </h:dataTable>
+            </h:column>
+        </h:dataTable>
+        <h:button value="Nowy mag" outcome="edit_wizard.xhtml"/>
+        <h:button value="Nowa wieża" outcome="edit_tower.xhtml"/>
+    </h:body>
+</html>
